@@ -1,3 +1,56 @@
-import { motion } from "framer-motion"; import { Link } from "react-router-dom"; import { Calendar, Building2, Eye, Trash2 } from "lucide-react"; import Badge from "../ui/Badge.jsx";
-const tone = score => score >= 75 ? "green" : score >= 50 ? "yellow" : "red";
-export default function SimulationCard({ simulation, onDeleteClick }) { const score = simulation.analysis?.startupScore ?? 0; const date = new Date(simulation.createdAt).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }); return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} whileHover={{ y: -4 }} className="flex flex-col rounded-2xl border border-slate-100 bg-white p-5 shadow-card"><div className="flex justify-between gap-3"><div><h3 className="font-semibold">{simulation.startupName}</h3><p className="mt-1 flex items-center gap-1.5 text-sm text-slate-500"><Building2 size={14} />{simulation.industry}</p></div><Badge tone={tone(score)}>{score}/100</Badge></div><p className="mt-3 flex items-center gap-1.5 text-xs text-slate-400"><Calendar size={13} />{date}</p><div className="mt-5 flex gap-2"><Link to={`/simulations/${simulation._id}`} className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary-600 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-700"><Eye size={15} />View</Link><button onClick={() => onDeleteClick(simulation)} className="rounded-xl border border-red-200 px-3 text-red-600 hover:bg-red-50"><Trash2 size={15} /></button></div></motion.div>; }
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Calendar, Building2, Eye, Trash2 } from "lucide-react";
+import Badge from "../ui/Badge.jsx";
+
+const tone = (score) => (score >= 75 ? "green" : score >= 50 ? "yellow" : "red");
+
+export default function SimulationCard({ simulation, onDeleteClick }) {
+  const score = simulation.analysis?.startupScore ?? 0;
+  const date = new Date(simulation.createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
+      className="flex flex-col rounded-2xl border border-slate-100 bg-white p-5 shadow-card"
+    >
+      <div className="flex justify-between gap-3">
+        <div>
+          <h3 className="font-semibold">{simulation.startupName}</h3>
+          <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-500">
+            <Building2 size={14} />
+            {simulation.industry}
+          </p>
+        </div>
+        <Badge tone={tone(score)}>{score}/100</Badge>
+      </div>
+
+      <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-400">
+        <Calendar size={13} />
+        {date}
+      </p>
+
+      <div className="mt-5 flex gap-2">
+        <Link
+          to={`/simulations/${simulation._id}`}
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary-600 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-700"
+        >
+          <Eye size={15} />
+          View
+        </Link>
+        <button
+          onClick={() => onDeleteClick(simulation)}
+          className="rounded-xl border border-red-200 px-3 text-red-600 hover:bg-red-50"
+        >
+          <Trash2 size={15} />
+        </button>
+      </div>
+    </motion.div>
+  );
+}

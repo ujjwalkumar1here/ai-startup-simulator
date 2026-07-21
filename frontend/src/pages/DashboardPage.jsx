@@ -1,2 +1,142 @@
-import { useEffect, useState } from "react"; import { Link } from "react-router-dom"; import { motion } from "framer-motion"; import { Sparkles, Target, Trophy, PlusCircle, Clock } from "lucide-react"; import StatCard from "../components/dashboard/StatCard.jsx"; import Skeleton from "../components/ui/Skeleton.jsx"; import EmptyState from "../components/ui/EmptyState.jsx"; import ErrorState from "../components/ui/ErrorState.jsx"; import Badge from "../components/ui/Badge.jsx"; import useAuth from "../hooks/useAuth.js"; import simulationService from "../services/simulationService.js";
-export default function DashboardPage() { const { user } = useAuth(); const [simulations, setSimulations] = useState([]); const [loading, setLoading] = useState(true); const [error, setError] = useState(null); const fetchData = async () => { setLoading(true); setError(null); try { setSimulations((await simulationService.getSimulations()).data || []); } catch (e) { setError(!e?.response ? "network" : e.response.status === 401 ? "unauthorized" : "default"); } finally { setLoading(false); } }; useEffect(() => { fetchData(); }, []); if (loading) return <div className="space-y-6"><Skeleton className="h-28 w-full" /><Skeleton className="h-28 w-full" /><Skeleton className="h-64 w-full" /></div>; if (error) return <ErrorState type={error} onRetry={fetchData} />; const scores = simulations.map(s => s.analysis?.startupScore || 0); const average = scores.length ? scores.reduce((a,b) => a + b, 0) / scores.length : 0; return <div className="space-y-6"><motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col justify-between gap-6 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white sm:flex-row sm:items-center"><div><h1 className="text-2xl font-bold">Welcome back, {user?.name?.split(" ")[0] || "Founder"}</h1><p className="mt-2 text-primary-100">Here's a snapshot of your AI startup simulations.</p></div><Link to="/simulations/new" className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-primary-700"><PlusCircle size={16} />Create New Simulation</Link></motion.div><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"><StatCard icon={Sparkles} label="Total Simulations" value={simulations.length} /><StatCard icon={Target} label="Average AI Score" value={average} decimals={1} suffix="/100" tone="green" /><StatCard icon={Trophy} label="Highest Score" value={scores.length ? Math.max(...scores) : 0} suffix="/100" tone="amber" /></div><div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-card"><div className="mb-4 flex justify-between"><h2 className="font-semibold">Recent Simulations / Activity</h2><Link to="/simulations" className="text-sm text-primary-600">View all</Link></div>{simulations.length ? <div className="space-y-3">{simulations.slice(0,5).map(s => <Link key={s._id} to={`/simulations/${s._id}`} className="flex items-center justify-between rounded-xl border p-3 hover:bg-slate-50"><span><b>{s.startupName}</b><span className="ml-3 inline-flex items-center gap-1 text-xs text-slate-400"><Clock size={12} />{new Date(s.createdAt).toLocaleDateString()}</span></span><Badge tone="blue">{s.analysis?.startupScore ?? 0}/100</Badge></Link>)}</div> : <EmptyState icon={Sparkles} title="No simulations yet" description="Start your first AI startup simulation to see activity here." action={<Link to="/simulations/new" className="rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white">New Simulation</Link>} />}</div></div>; }
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Sparkles, Target, Trophy, PlusCircle, Clock } from "lucide-react";
+import StatCard from "../components/dashboard/StatCard.jsx";
+import Skeleton from "../components/ui/Skeleton.jsx";
+import EmptyState from "../components/ui/EmptyState.jsx";
+import ErrorState from "../components/ui/ErrorState.jsx";
+import Badge from "../components/ui/Badge.jsx";
+import useAuth from "../hooks/useAuth.js";
+import simulationService from "../services/simulationService.js";
+
+export default function DashboardPage() {
+  const { user } = useAuth();
+  const [simulations, setSimulations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      setSimulations((await simulationService.getSimulations()).data || []);
+    } catch (e) {
+      setError(
+        !e?.response ? "network" : e.response.status === 401 ? "unauthorized" : "default"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <Skeleton className="h-28 w-full" />
+        <Skeleton className="h-28 w-full" />
+        <Skeleton className="h-64 w-full" />
+      </div>
+    );
+  }
+
+  if (error) return <ErrorState type={error} onRetry={fetchData} />;
+
+  const scores = simulations.map((s) => s.analysis?.startupScore || 0);
+  const average = scores.length
+    ? scores.reduce((a, b) => a + b, 0) / scores.length
+    : 0;
+
+  return (
+    <div className="space-y-6">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col justify-between gap-6 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white sm:flex-row sm:items-center"
+      >
+        <div>
+          <h1 className="text-2xl font-bold">
+            Welcome back, {user?.name?.split(" ")[0] || "Founder"}
+          </h1>
+          <p className="mt-2 text-primary-100">
+            Here's a snapshot of your AI startup simulations.
+          </p>
+        </div>
+        <Link
+          to="/simulations/new"
+          className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-primary-700"
+        >
+          <PlusCircle size={16} />
+          Create New Simulation
+        </Link>
+      </motion.div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <StatCard icon={Sparkles} label="Total Simulations" value={simulations.length} />
+        <StatCard
+          icon={Target}
+          label="Average AI Score"
+          value={average}
+          decimals={1}
+          suffix="/100"
+          tone="green"
+        />
+        <StatCard
+          icon={Trophy}
+          label="Highest Score"
+          value={scores.length ? Math.max(...scores) : 0}
+          suffix="/100"
+          tone="amber"
+        />
+      </div>
+
+      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-card">
+        <div className="mb-4 flex justify-between">
+          <h2 className="font-semibold">Recent Simulations / Activity</h2>
+          <Link to="/simulations" className="text-sm text-primary-600">
+            View all
+          </Link>
+        </div>
+
+        {simulations.length ? (
+          <div className="space-y-3">
+            {simulations.slice(0, 5).map((s) => (
+              <Link
+                key={s._id}
+                to={`/simulations/${s._id}`}
+                className="flex items-center justify-between rounded-xl border p-3 hover:bg-slate-50"
+              >
+                <span>
+                  <b>{s.startupName}</b>
+                  <span className="ml-3 inline-flex items-center gap-1 text-xs text-slate-400">
+                    <Clock size={12} />
+                    {new Date(s.createdAt).toLocaleDateString()}
+                  </span>
+                </span>
+                <Badge tone="blue">{s.analysis?.startupScore ?? 0}/100</Badge>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            icon={Sparkles}
+            title="No simulations yet"
+            description="Start your first AI startup simulation to see activity here."
+            action={
+              <Link
+                to="/simulations/new"
+                className="rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white"
+              >
+                New Simulation
+              </Link>
+            }
+          />
+        )}
+      </div>
+    </div>
+  );
+}

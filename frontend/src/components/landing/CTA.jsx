@@ -1,2 +1,23 @@
-import { Link } from "react-router-dom"; import { ArrowRight } from "lucide-react";
-export default function CTA() { return <section className="px-4 py-20"><div className="mx-auto max-w-4xl rounded-3xl bg-primary-600 px-6 py-14 text-center shadow-soft"><h2 className="text-3xl font-bold text-white sm:text-4xl">Ready to Test Your Startup Idea?</h2><p className="mx-auto mt-4 max-w-xl text-primary-100">Join founders using AI to validate ideas before investing months of time and money.</p><Link to="/signup" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 hover:bg-primary-50">Get Started for Free <ArrowRight size={16} /></Link></div></section>; }
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+export default function CTA() {
+  return (
+    <section className="px-4 py-20">
+      <div className="mx-auto max-w-4xl rounded-3xl bg-primary-600 px-6 py-14 text-center shadow-soft">
+        <h2 className="text-3xl font-bold text-white sm:text-4xl">
+          Ready to Test Your Startup Idea?
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-primary-100">
+          Join founders using AI to validate ideas before investing months of time and money.
+        </p>
+        <Link
+          to="/signup"
+          className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 hover:bg-primary-50"
+        >
+          Get Started for Free <ArrowRight size={16} />
+        </Link>
+      </div>
+    </section>
+  );
+}

@@ -1,2 +1,19 @@
-import Hero from "../components/landing/Hero.jsx"; import Features from "../components/landing/Features.jsx"; import HowItWorks from "../components/landing/HowItWorks.jsx"; import AISimulationSection from "../components/landing/AISimulationSection.jsx"; import InvestorRoomSection from "../components/landing/InvestorRoomSection.jsx"; import CTA from "../components/landing/CTA.jsx";
-export default function LandingPage() { return <><Hero /><Features /><HowItWorks /><AISimulationSection /><InvestorRoomSection /><CTA /></>; }
+import Hero from "../components/landing/Hero.jsx";
+import Features from "../components/landing/Features.jsx";
+import HowItWorks from "../components/landing/HowItWorks.jsx";
+import AISimulationSection from "../components/landing/AISimulationSection.jsx";
+import InvestorRoomSection from "../components/landing/InvestorRoomSection.jsx";
+import CTA from "../components/landing/CTA.jsx";
+
+export default function LandingPage() {
+  return (
+    <>
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <AISimulationSection />
+      <InvestorRoomSection />
+      <CTA />
+    </>
+  );
+}
