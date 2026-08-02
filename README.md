@@ -232,9 +232,6 @@ This project helped strengthen practical knowledge of:
 GitHub:
 https://github.com/ujjwalkumar1here
 
-LinkedIn:
-(Add your LinkedIn profile here)
-
 ---
 
 # ⭐ Support
