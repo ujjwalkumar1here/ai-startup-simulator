@@ -4,6 +4,7 @@ const {
   answerQuestion,
   getSession,
   getHistory,
+  deleteSession,
 } = require("../controllers/investor.controller");
 const { protect } = require("../middleware/auth.middleware");
 
@@ -15,5 +16,6 @@ router.post("/start", startSession);
 router.post("/answer", answerQuestion);
 router.get("/history", getHistory);
 router.get("/session/:id", getSession);
+router.delete("/session/:id", deleteSession);
 
 module.exports = router;

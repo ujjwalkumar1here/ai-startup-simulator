@@ -8,12 +8,18 @@ const {
   submitAnswer,
   getSessionById,
   getUserHistory,
+  deleteSessionById,
 } = require("../services/investor.service");
+
+// this is to start investor session
 
 const startSession = asyncHandler(async (req, res) => {
   const { simulationId } = req.body;
 
   validateStartInput({ simulationId });
+
+
+  // generate question
 
   const session = await startInvestorSession(req.user._id, simulationId);
 
@@ -59,6 +65,7 @@ const getSession = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, session, "Investor session fetched successfully"));
 });
 
+//Return all investor interview sessions
 const getHistory = asyncHandler(async (req, res) => {
   const sessions = await getUserHistory(req.user._id);
 
@@ -67,4 +74,18 @@ const getHistory = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, sessions, "Investor history fetched successfully"));
 });
 
-module.exports = { startSession, answerQuestion, getSession, getHistory };
+const deleteSession = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new ApiError(400, "Invalid session id");
+  }
+
+  await deleteSessionById(req.user._id, id);
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, null, "Investor session deleted successfully"));
+});
+
+module.exports = { startSession, answerQuestion, getSession, getHistory, deleteSession };

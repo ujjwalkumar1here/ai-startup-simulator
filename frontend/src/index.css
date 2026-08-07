@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
@@ -39,8 +41,23 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   background-color: #f8fafc;
-  color: #0f172a;
+  color: #111827;
 }
+
+html { background: #f8fafc; transition: background-color .2s ease, color .2s ease; }
+html.dark { background: #0f172a; }
+html.dark body { background: #0f172a; color: #f8fafc; }
+html.dark .bg-white { background-color: #1e293b; }
+html.dark .bg-slate-50, html.dark .bg-slate-100 { background-color: #0f172a; }
+html.dark .bg-slate-200 { background-color: #334155; }
+html.dark .text-slate-900, html.dark .text-slate-950, html.dark .text-slate-800 { color: #f8fafc; }
+html.dark .text-slate-700, html.dark .text-slate-600 { color: #cbd5e1; }
+html.dark .text-slate-500, html.dark .text-slate-400 { color: #94a3b8; }
+html.dark .border-slate-100, html.dark .border-slate-200, html.dark .border-slate-300 { border-color: #334155; }
+html.dark input, html.dark textarea, html.dark select { background-color: #1e293b; color: #f8fafc; }
+input::placeholder, textarea::placeholder { color: #94a3b8; opacity: 1; }
+html.dark input::placeholder, html.dark textarea::placeholder { color: #64748b; }
+body, header, aside, main, section, input, textarea, select, button { transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
 
 ::-webkit-scrollbar {
   width: 8px;

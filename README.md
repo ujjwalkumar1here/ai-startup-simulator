@@ -1,98 +1,114 @@
 # 🚀 AI Startup Simulator
 
-An AI-powered MERN Stack web application that enables aspiring entrepreneurs to simulate startup ideas, receive AI-generated business analysis, and pitch their ideas to an AI investor for funding decisions.
-
-This project leverages **Google Gemini AI** to provide intelligent startup evaluations, SWOT analysis, business recommendations, and interactive investor conversations.
+An AI-powered full-stack platform that helps founders validate startup ideas before building them. The application generates detailed startup analysis using Google Gemini AI and allows users to pitch their startup to an AI-powered investor panel for real-time evaluation and funding recommendations.
 
 ---
 
 ## ✨ Features
 
-### 🔐 Authentication
-- User Registration & Login
-- JWT Authentication
-- Protected Routes
-- Secure Cookie-Based Authentication
-
-### 🤖 AI Startup Simulation
-- Submit startup ideas
-- AI-generated startup evaluation
-- SWOT Analysis
-- Market Opportunity Analysis
-- Risk Assessment
-- Business Score
-- Personalized Recommendations
-
-### 💼 AI Investor Room
-- Interactive AI Investor Chat
-- Ask Business-Related Questions
-- AI Funding Decision
-- Investment Feedback
-
-### 📊 Dashboard
-- View Startup Simulations
-- Performance Statistics
-- Recent Simulations
-
-### 👤 User Profile
-- User Information
-- Total Simulations
-- Average AI Score
-
-### 📱 Responsive UI
-- Modern UI
-- Mobile Friendly
-- Smooth Animations
+- 🤖 AI-powered startup idea evaluation using Google Gemini AI
+- 📊 Comprehensive startup analysis with startup scoring
+- 💡 AI-generated recommendations and funding insights
+- 🎯 Interactive AI Investor Room with 10 real-world VC questions
+- 📈 Real-time scoring and feedback for every investor answer
+- 🏆 Final investor verdict with funding probability
+- 📝 Complete investor Q&A transcript with strengths, weaknesses, and improvements
+- 🔐 Secure JWT Authentication
+- 🌙 Dark & Light Theme
+- 📱 Responsive UI
+- 📂 Simulation and investor session history
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
-## Frontend
+### Frontend
 - React.js
-- Vite
-- Tailwind CSS
 - React Router DOM
+- Tailwind CSS
 - Axios
-- React Hook Form
 - Framer Motion
+- Lucide React
+- React Hot Toast
 
-## Backend
+### Backend
 - Node.js
 - Express.js
 - MongoDB
 - Mongoose
 - JWT Authentication
-- Cookie Parser
-- Google Gemini AI SDK
+- Bcrypt
+
+### AI
+- Google Gemini AI
+
+### Tools
+- Git
+- GitHub
+- VS Code
+- Postman
 
 ---
 
-# 📂 Project Structure
+# 📸 Application Screenshots
 
-```
-ai-startup-simulator
-│
-├── backend
-│   ├── src
-│   ├── package.json
-│   ├── .env.example
-│   └── README.md
-│
-├── frontend
-│   ├── src
-│   ├── package.json
-│   ├── .env.example
-│   └── README.md
-│
-└── README.md
-```
+## Landing Page
+
+![Landing Page](./screenshot/landingpage.png)
+
+---
+
+## Sign In
+
+![Sign In](./screenshot/sign-in.png)
+
+---
+
+## Dashboard
+
+![Dashboard](./screenshot/dashboard.png)
+
+---
+
+## New Startup Simulation
+
+![New Simulation](./screenshot/new-simulation.png)
+
+---
+
+## AI Startup Analysis
+
+![Startup Analysis](./screenshot/startup-analysis.png)
+
+---
+
+## Investor Room
+
+![Investor Room](./screenshot/investor-room.png)
+
+---
+
+## AI Investor Interview
+
+![Investor Interview](./screenshot/investor-interview.png)
+
+---
+
+## Investor Final Verdict
+
+![Investor Final Verdict](./screenshot/investor-final-verdict.png)
+
+---
+
+## Investor Q&A Transcript
+
+![Investor Transcript](./screenshot/investor-qa-transcript.png)
 
 ---
 
 # ⚙️ Installation
 
-## 1️⃣ Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/ujjwalkumar1here/ai-startup-simulator.git
@@ -104,124 +120,84 @@ cd ai-startup-simulator
 
 ---
 
-## 2️⃣ Install Backend
+## Backend
 
 ```bash
 cd backend
 npm install
 ```
 
----
+Create a `.env` file using `.env.example`.
 
-## 3️⃣ Install Frontend
+Start the backend server:
 
 ```bash
-cd ../frontend
+npm run dev
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend
 npm install
+```
+
+Start the frontend server:
+
+```bash
+npm run dev
 ```
 
 ---
 
 # 🔑 Environment Variables
 
-## Backend (.env)
+Backend `.env`
 
 ```env
-PORT=5000
-
-MONGODB_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_jwt_secret
-
-GEMINI_API_KEY=your_gemini_api_key
-
-GEMINI_MODEL=gemini-3.1-flash-lite-preview
-
-NODE_ENV=development
+PORT=
+MONGODB_URI=
+JWT_SECRET=
+GEMINI_API_KEY=
+GEMINI_MODEL=
+NODE_ENV=
 ```
 
 ---
 
-## Frontend (.env)
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
----
-
-# ▶️ Running the Project
-
-## Start Backend
-
-```bash
-cd backend
-npm run dev
-```
-
----
-
-## Start Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
-Frontend will run at
+# 📂 Project Structure
 
 ```
-http://localhost:5173
+ai-startup-simulator
+│
+├── backend
+│   ├── src
+│   ├── package.json
+│   └── .env.example
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   └── package.json
+│
+├── screenshot
+│
+└── README.md
 ```
-
-Backend will run at
-
-```
-http://localhost:5000
-```
-
----
-
-# 📸 Screenshots
-
-> Add screenshots here after deploying the project.
-
-- Landing Page
-- Login Page
-- Dashboard
-- Startup Simulation
-- AI Evaluation
-- Investor Room
-- Profile
 
 ---
 
 # 🚀 Future Improvements
 
-- AI Report PDF Export
-- Startup Idea Comparison
-- Multiple AI Investor Personas
-- Email Notifications
-- Startup Collaboration
-- Admin Dashboard
-- AI Pitch Deck Generator
-
----
-
-# 📚 Learning Outcomes
-
-This project helped strengthen practical knowledge of:
-
-- MERN Stack Development
-- REST API Design
-- JWT Authentication
-- MongoDB & Mongoose
-- React Routing
-- State Management
-- Google Gemini AI Integration
-- Error Handling
-- Project Structure
-- Git & GitHub Workflow
+- Google Authentication
+- AI-generated pitch deck
+- Startup comparison dashboard
+- Team collaboration
+- Email notifications
+- Export analysis as PDF
+- Multi-language support
 
 ---
 
@@ -229,11 +205,14 @@ This project helped strengthen practical knowledge of:
 
 **Ujjwal Kumar**
 
+📧 ujjwalrajput.here@gmail.com
+
 GitHub:
 https://github.com/ujjwalkumar1here
 
+LinkedIn:
+https://www.linkedin.com/in/ujjwal-kumar-015042325
+
 ---
 
-# ⭐ Support
-
-If you found this project helpful, consider giving it a ⭐ on GitHub.
+⭐ If you found this project useful, consider giving it a star!

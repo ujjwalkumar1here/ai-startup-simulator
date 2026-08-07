@@ -202,9 +202,20 @@ const getUserHistory = async (userId) => {
     .sort({ createdAt: -1 });
 };
 
+const deleteSessionById = async (userId, sessionId) => {
+  const session = await InvestorSession.findOneAndDelete({ _id: sessionId, user: userId });
+
+  if (!session) {
+    throw new ApiError(404, "Investor session not found");
+  }
+
+  return session;
+};
+
 module.exports = {
   startInvestorSession,
   submitAnswer,
   getSessionById,
   getUserHistory,
+  deleteSessionById,
 };

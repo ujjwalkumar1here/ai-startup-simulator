@@ -33,7 +33,7 @@ const feedbackSchema = new mongoose.Schema(
     probabilityOfFunding: { type: String, required: true },
   },
   { _id: false }
-);
+);  
 
 const investorSessionSchema = new mongoose.Schema(
   {

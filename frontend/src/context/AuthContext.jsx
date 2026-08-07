@@ -8,5 +8,6 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => { const response = await authService.login(credentials); setUser(response.data); return response; };
   const register = async (payload) => { const response = await authService.register(payload); setUser(response.data); return response; };
   const logout = async () => { await authService.logout(); setUser(null); };
-  return <AuthContext.Provider value={{ user, loading, isAuthenticated: Boolean(user), login, register, logout }}>{children}</AuthContext.Provider>;
+  const deleteAccount = async () => { await authService.deleteAccount(); setUser(null); localStorage.clear(); };
+  return <AuthContext.Provider value={{ user, loading, isAuthenticated: Boolean(user), login, register, logout, deleteAccount }}>{children}</AuthContext.Provider>;
 };
